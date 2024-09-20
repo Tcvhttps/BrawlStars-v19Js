@@ -1,0 +1,22 @@
+[
+    {
+      "name": "<c007fff>G<c00ffff>E<c00ff7f>M<c00ff00>S</c>",
+      "cost": 12,
+      "timer": 86400,
+      "ShopDisplay": 1,
+      "type": 1,
+      "purchased": [
+      ],
+      "includes": [
+        {
+          "id": 8,
+          "multiplier": 13,
+          "dataRef": [
+            16,
+            1
+          ],
+          "skinID": 0
+        }
+      ]
+    }
+  ]
