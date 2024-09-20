@@ -1,327 +1,158 @@
-/**
-  * ByteStream
-  * 
-  * For clear communication between client and server.
-  * 
-  */
-class ByteStream {
-  constructor (data) {
-    // eslint-disable-next-line new-cap
-    this.buffer = data != null ? data : Buffer.alloc(0)
-    this.length = 0
-    this.offset = 0
-    this.bitOffset = 0
+const net = require('net')
+const config = require("./config.json")
+const Crypto = require("./Crypto/RC4")
+const MessageFactory = require('./Protocol/MessageFactory')
+const server = new net.Server()
+const Messages = new MessageFactory(config.useLegacyPacketLoader)
+const MessagesHandler = require("./Networking/MessagesHandler")
+const Queue = require("./Networking/Queue")
+require("colors"), require("./Utils/Logger");
+
+const Player = require('./Logic/Player');
+const Events = require('./Logic/Events');
+const Shop = require('./Logic/Shop');
+
+
+const PORT = config.port
+
+global.sessions = []
+
+server.on('connection', async (session) => {
+  session.setNoDelay(true)
+  session.setTimeout(config.sessionTimeoutSeconds * 1000)
+
+  session.ip = session.remoteAddress.split(':').slice(-1);
+
+  session.log = function (text) {
+    return Client(session.ip, text)
   }
 
-  /**
-   *  Reading Int from Bytes
-   * @returns { Number } Int
-   */
-  readInt () {
-    this.bitOffset = 0
-    return (this.buffer[this.offset++] << 24 |
-            (this.buffer[this.offset++] << 16 |
-                (this.buffer[this.offset++] << 8 |
-                    this.buffer[this.offset++])))
+  session.warn = function (text) {
+    return ClientWarn(session.ip, text)
   }
 
-  skip (len) {
-    this.bitOffset += len
+  session.errLog = function (text) {
+    return ClientError(session.ip, text)
   }
 
-  /**
-   *  Reading Short from Bytes (`commonly isn't used.`)
-   * @returns { Number } Short
-   */
-  readShort () {
-    this.bitOffset = 0
-    return (this.buffer[this.offset++] << 8 |
-            this.buffer[this.offset++])
-  }
+  session.crypto = new Crypto(config.crypto.keys.key, config.crypto.keys.nonce)
 
-  /**
-   * Writing value to Bytes as Short (c`ommonly isn't used`)
-   * @param {Number} value Your value to write.
-   */
-  writeShort (value) {
-    this.bitOffset = 0
-    this.ensureCapacity(2)
-    this.buffer[this.offset++] = (value >> 8)
-    this.buffer[this.offset++] = (value)
-  }
+  session.id = sessions.length == 0 ? 1 : sessions[sessions.length - 1].id + 1
 
+  session.queue = new Queue(config.maxQueueSize, config.disableQueuebugtxtFile)
 
-  /**
-   * Writing value to Bytes as Int
-   * @param {Number} value Your value to write.
-   */
-  writeInt (value) {
-    this.bitOffset = 0
-    this.ensureCapacity(4)
-    this.buffer[this.offset++] = (value >> 24)
-    this.buffer[this.offset++] = (value >> 16)
-    this.buffer[this.offset++] = (value >> 8)
-    this.buffer[this.offset++] = (value)
-  }
+  global.sessions.push(session)
 
-  /**
-   * Get Bytes in String
-   * @returns { String } Bytes in String form (`AA-BB-CC`)
-   */
-  getHex () {
-    return this.buffer.toString("hex").toUpperCase().match(/.{0,2}/g).filter(e => e != "").join("-")
-  }
+  session.log(`A wild connection appeard! (SESSIONID: ${session.id})`)
+  
+  const packets = Messages.getAllPackets();
+  const MessageHandler = new MessagesHandler(session, packets)
+  session.Player = new Player();
+  session.on('data', async (bytes) => {
+    let messageHeader = {}
 
-  /**
-   *  Reading String from Bytes
-   * @returns { String } String
-   */
-  readString () {
-    const length = this.readInt()
+    session.queue.push(bytes)
 
-    if (length > 0 && length < 90000) {
-      const stringBytes = this.buffer.slice(this.offset, this.offset + length)
-      const string = stringBytes.toString('utf8')
-      this.offset += length
-      return string
+    switch (session.queue.state) {
+      case session.queue.QUEUE_OVERFILLED:
+        if (config.enableQueueOverfillingWarning) session.warn(`Queue is overfilled! Queue size: ${session.queue.size()}`)
+
+        if (config.disconnectSessionOnQueueOverfilling) {
+          session.warn(`Client disconnected.`)
+          clearSession(session)
+          session.destroy()
+        }
+      break;
+      case session.queue.QUEUE_PUSHED_MORE_THAN_EXPECTED:
+        session.warn(`Queue got more bytes than expected! Expected: ${session.queue.getQueueExpectedSize()} size. Got: ${session.queue.size()} size.`)
+      break;
+      case session.queue.QUEUE_DETECTED_MERGED_PACKETS:
+        session.warn(`Queue detected merged packets!`)
+      break;
     }
-    return ''
-  }
 
-  /**
-   * Reading VarInt from Bytes
-   * @returns { Number } VarInt
-   */
-  readVInt () {
-    let result = 0,
-      shift = 0,
-      s = 0,
-      a1 = 0,
-      a2 = 0
-    do {
-      let byte = this.buffer[this.offset++]
-      if (shift === 0) {
-        a1 = (byte & 0x40) >> 6
-        a2 = (byte & 0x80) >> 7
-        s = (byte << 1) & ~0x181
-        byte = s | (a2 << 7) | a1
+    if (!session.queue.isBusy()) {
+      const queueBytes = session.queue.release()
+
+      if (Array.isArray(queueBytes)) {
+        session.log("Handling merged packets...")
+        for(let packet of queueBytes) {
+          if (config.crypto.activate) {
+            packet.bytes = await session.crypto.decrypt(packet.bytes)
+          }
+          
+          await MessageHandler.handle(packet.id, packet.bytes, { })
+        }
+
+        return session.log("Merged packets was handled.")
       }
-      result |= (byte & 0x7f) << shift
-      shift += 7
-      if (!(byte & 0x80))
-      { break }
-    } while (true)
-
-    return (result >> 1) ^ (-(result & 1))
-  }
-
-  /**
-   * Reading 2 VarInts from Bytes
-   * @returns { Array<Number> } Commonly CSVID and ReferenceID
-   */
-  readDataReference(){
-    const a1 = this.readVInt()
-    return [ a1, a1 == 0 ? 0 : this.readVInt() ]
-  }
-
-  /**
-   * Writing values to Bytes as VarInts
-   * If value1 is 0, then 2nd value doesn't used
-   * 
-   * @param {Number} value1 Your value to write. Commonly it's a CSVID
-   * @param {Number} value2 Your value to write. Commonly it's a ReferenceID
-   */
-  writeDataReference (value1, value2) {
-    if(value1 < 1){
-      this.writeVInt(0)
-    }else{
-      this.writeVInt(value1)
-      this.writeVInt(value2)
-    }
-  }
-
-  /**
-   * Writing value to Bytes as VarInt
-   * @param {Number} value Your value to write.
-   */
-  writeVInt (value) {
-    this.bitOffset = 0
-    let temp = (value >> 25) & 0x40
-
-    let flipped = value ^ (value >> 31)
-
-    temp |= value & 0x3F
-
-    value >>= 6
-    flipped >>= 6
-
-    if (flipped === 0) {
-      this.writeByte(temp)
-      return 0
+      
+      messageHeader = {
+        id: queueBytes.readUInt16BE(0),
+        len: queueBytes.readUIntBE(2, 3),
+        version: queueBytes.readUInt16BE(5),
+        bytes: queueBytes.slice(7, this.len)
+      }
+    } else {
+      return;
     }
 
-    this.writeByte(temp | 0x80)
-
-    flipped >>= 7
-    let r = 0
-
-    if (flipped)
-    { r = 0x80 }
-
-    this.writeByte((value & 0x7F) | r)
-
-    value >>= 7
-
-    while (flipped !== 0) {
-      flipped >>= 7
-      r = 0
-      if (flipped)
-      { r = 0x80 }
-      this.writeByte((value & 0x7F) | r)
-      value >>= 7
-    }
-  }
-
-  /**
-   * Writing value to Bytes as Boolean
-   * @param {Boolean} value Your value to write.
-   */
-  writeBoolean (value) {
-    if (value) {
-      this.writeVInt(1)
-    }else{
-      this.writeVInt(0)
-    }
-  }
-
-  /**
-   * Reading Boolean from Bytes
-   * @returns { Boolean } Boolean (`true|false`)
-   */
-  readBoolean(){
-    return this.readVInt() >= 1
-  }
-
-  /**
-   * Writing value to Bytes as String
-   * @param {String} value Your value to write.
-   */
-  writeString (value) {
-    if (value == null || value.length > 90000) {
-      this.writeInt(-1)
-      return
+    if (config.crypto.activate) {
+      messageHeader.bytes = await session.crypto.decrypt(messageHeader.bytes)
     }
 
-    const buf = Buffer.from(value, 'utf8')
-    this.writeInt(buf.length)
-    this.buffer = Buffer.concat([this.buffer, buf])
-    this.offset += buf.length
-  }
+    await MessageHandler.handle(messageHeader.id, messageHeader.bytes, {})
+  })
 
-  /**
-   * Writing value to Bytes as String (`You can just use writeString()`)
-   * @param {String} value Your value to write.
-   */
-  writeStringReference = this.writeString
+  session.on('end', async () => {
+    clearSession(session)
+    session.log('Client disconnected.')
+    return session.destroy() 
+  })
 
-  /**
-   * Writing value to Bytes as LongLong (`commonly isn't used`)
-   * @param {Number} value Your value to write.
-   */
-  writeLongLong (value) {
-    this.writeInt(value >> 32)
-    this.writeInt(value)
-  }
+  session.on('error', async error => {
+    try {
+      clearSession(session)
+      session.errLog('A wild error!')
+      console.error(error)
+      return session.destroy()
+    } catch (e) { }
+  })
 
-  /**
-   * Writing values to Bytes as VarInts
-   * 
-   * @param {Number} value1 Your value to write.
-   * @param {Number} value2 Your value to write.
-   */
-  writeLogicLong (value1, value2) {
-    this.writeVInt(value1)
-    this.writeVInt(value2)
-  }
+  session.on('timeout', async () => {
+    clearSession(session)
+    session.warn('Session timeout was reached.')
+    return session.destroy()
+  })
+})
 
-  /**
-   * Reading 2 VarInts from Bytes
-   * @returns { Array<Number> } LogicLong VarInts
-   */
-  readLogicLong () {
-    return [ this.readVInt(), this.readVInt() ]
-  }
-
-  /**
-   * Writing values to Bytes as Ints
-   * 
-   * @param {Number} value1 Your value to write.
-   * @param {Number} value2 Your value to write.
-   */
-  writeLong (value1, value2) {
-    this.writeInt(value1)
-    this.writeInt(value2)
-  }
-
-  /**
-   * Reading 2 Ints from Bytes
-   * @returns { Array<Number> } Long Ints
-   */
-  readLong () {
-    return [ this.readInt(), this.readInt() ]
-  }
-
-  /**
-   * Writing value to Bytes as Byte
-   * @param {Number} value Your value to write.
-   */
-  writeByte (value) {
-    this.bitOffset = 0
-    this.ensureCapacity(1)
-    this.buffer[this.offset++] = value
-  }
-
-  /**
-   * Writing value to Bytes as ByteArray
-   * @param {Buffer} buffer Your buffer to write.
-   */
-  writeBytes (buffer) {
-    const length = buffer.length
-
-    if (buffer != null) {
-      this.writeInt(length)
-      this.buffer = Buffer.concat([this.buffer, buffer])
-      this.offset += length
-      return
-    }
-
-    this.writeInt(-1)
-  }
-
-  /**
-   * Writing HEX to Bytes
-   * @param {String} str HEX data.
-   */
-  writeHex(str){
-    let encoded = Buffer.from(str.replace(/-/g, '').match(/.{1,2}/g).map(byte => parseInt(byte, 16)))
-
-    this.buffer = Buffer.concat([this.buffer, encoded]);
-    this.offset += encoded.length
-  }
-
-  /**
-   * Adding more space to Buffer
-   * @param {Number} capacity Amount of new space
-   */
-  ensureCapacity (capacity) {
-    const bufferLength = this.buffer.length
-
-    if (this.offset + capacity > bufferLength) {
-      // eslint-disable-next-line new-cap
-      const tmpBuffer = new Buffer.alloc(capacity)
-      this.buffer = Buffer.concat([this.buffer, tmpBuffer])
-    }
-  }
+function clearSession (session) {
+  sessions = sessions.filter(otherSession => otherSession.id != session.id)
 }
 
-module.exports = ByteStream
+server.once('listening', () => Log(`${config.serverName} started on ${PORT} port!`))
+server.listen(PORT)
+
+process.on("uncaughtException", e => Warn(e.stack));
+
+process.on("unhandledRejection", e => Warn(e.stack));
+
+
+function getCurrentTimeInMSK() {
+  const currentTime = new Date();
+
+  const hours = currentTime.getUTCHours() + 3; // +3 Of MSK
+  const minutes = currentTime.getUTCMinutes();
+  const seconds = currentTime.getUTCSeconds();
+
+  const formattedTime = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  return formattedTime;
+}
+
+setInterval(() => {
+  const currentTimeInMSK = getCurrentTimeInMSK();
+  if (currentTimeInMSK === '11:00:00'){
+    new Events().update()
+    new Shop().update()
+  }
+}, 1000);
