@@ -1,0 +1,955 @@
+[
+  {
+    "lowID": 1,
+    "token": "VUrYbJgQns5B5lFDibJX6fyfvZaOpac5Mb2BM4BA",
+    "Trophies": 52,
+    "TrophyRoadTier": 95,
+    "Experience": 512,
+    "Thumbnail": 0,
+    "Namecolor": 0,
+    "TokensDoubler": 11500,
+    "BattleTokens": 200,
+    "Tickets": 0,
+    "Starpoints": 0,
+    "BigBox": 121687,
+    "Gold": 12104499,
+    "Box": 1801,
+    "Gems": 175.8523809523811,
+    "SkinID": 9,
+    "AuthorCode": "",
+    "Name": "maks",
+    "ClubID": 0,
+    "ClubRole": 1,
+    "TrioWINS": 0,
+    "SoloWINS": 0,
+    "Status": 11,
+    "Shop": [
+      {
+        "name": " ",
+        "cost": 0,
+        "timer": 86400,
+        "ShopDisplay": 1,
+        "type": 0,
+        "claim": true,
+        "includes": [
+          {
+            "id": 1,
+            "multiplier": 51,
+            "dataRef": [
+              0,
+              0
+            ],
+            "skinID": 0
+          }
+        ]
+      },
+      {
+        "name": " ",
+        "cost": 8,
+        "timer": 86400,
+        "ShopDisplay": 1,
+        "type": 1,
+        "claim": true,
+        "includes": [
+          {
+            "id": 8,
+            "multiplier": 37,
+            "dataRef": [
+              16,
+              8
+            ],
+            "skinID": 0
+          }
+        ]
+      },
+      {
+        "name": " ",
+        "cost": 80.5,
+        "timer": 86400,
+        "ShopDisplay": 1,
+        "type": 1,
+        "claim": true,
+        "includes": [
+          {
+            "id": 8,
+            "multiplier": 179,
+            "dataRef": [
+              16,
+              0
+            ],
+            "skinID": 0
+          }
+        ]
+      },
+      {
+        "name": " ",
+        "cost": 22.5,
+        "timer": 86400,
+        "ShopDisplay": 1,
+        "type": 1,
+        "claim": false,
+        "includes": [
+          {
+            "id": 8,
+            "multiplier": 160,
+            "dataRef": [
+              16,
+              2
+            ],
+            "skinID": 0
+          }
+        ]
+      },
+      {
+        "name": " ",
+        "cost": 130.5,
+        "timer": 86400,
+        "ShopDisplay": 1,
+        "type": 1,
+        "claim": false,
+        "includes": [
+          {
+            "id": 8,
+            "multiplier": 305,
+            "dataRef": [
+              16,
+              1
+            ],
+            "skinID": 0
+          }
+        ]
+      }
+    ],
+    "Skins": [],
+    "Brawlers": [
+      {
+        "id": 0,
+        "cardID": 0,
+        "skill": 76,
+        "unlocked": true,
+        "level": 8,
+        "points": 1428,
+        "trophies": 0
+      },
+      {
+        "id": 1,
+        "cardID": 4,
+        "skill": 77,
+        "unlocked": true,
+        "level": 8,
+        "points": 1460,
+        "trophies": 0
+      },
+      {
+        "id": 2,
+        "cardID": 8,
+        "skill": 78,
+        "unlocked": true,
+        "level": 8,
+        "points": 1497,
+        "trophies": 0
+      },
+      {
+        "id": 3,
+        "cardID": 12,
+        "skill": 79,
+        "unlocked": true,
+        "level": 7,
+        "points": 1512,
+        "trophies": 0
+      },
+      {
+        "id": 4,
+        "cardID": 16,
+        "skill": 80,
+        "unlocked": true,
+        "level": 8,
+        "points": 1464,
+        "trophies": 52
+      },
+      {
+        "id": 5,
+        "cardID": 20,
+        "skill": 81,
+        "unlocked": true,
+        "level": 0,
+        "points": 1471,
+        "trophies": 0
+      },
+      {
+        "id": 6,
+        "cardID": 24,
+        "skill": 82,
+        "unlocked": true,
+        "level": 8,
+        "points": 1489,
+        "trophies": 0
+      },
+      {
+        "id": 7,
+        "cardID": 28,
+        "skill": 83,
+        "unlocked": true,
+        "level": 8,
+        "points": 1487,
+        "trophies": 0
+      },
+      {
+        "id": 8,
+        "cardID": 32,
+        "skill": 84,
+        "unlocked": true,
+        "level": 0,
+        "points": "0[object Object]",
+        "trophies": 0
+      },
+      {
+        "id": 9,
+        "cardID": 36,
+        "skill": 85,
+        "unlocked": true,
+        "level": 8,
+        "points": 1449,
+        "trophies": 0
+      },
+      {
+        "id": 10,
+        "cardID": 40,
+        "skill": 86,
+        "unlocked": true,
+        "level": 8,
+        "points": 1521,
+        "trophies": 0
+      },
+      {
+        "id": 11,
+        "cardID": 44,
+        "skill": 87,
+        "unlocked": true,
+        "level": 0,
+        "points": 1463,
+        "trophies": 0
+      },
+      {
+        "id": 12,
+        "cardID": 48,
+        "skill": 88,
+        "unlocked": true,
+        "level": 0,
+        "points": 1446,
+        "trophies": 0
+      },
+      {
+        "id": 13,
+        "cardID": 52,
+        "skill": 89,
+        "unlocked": true,
+        "level": 8,
+        "points": 1483,
+        "trophies": 0
+      },
+      {
+        "id": 14,
+        "cardID": 56,
+        "skill": 90,
+        "unlocked": true,
+        "level": 8,
+        "points": 1463,
+        "trophies": 0
+      },
+      {
+        "id": 15,
+        "cardID": 60,
+        "skill": 91,
+        "unlocked": true,
+        "level": 0,
+        "points": 1492,
+        "trophies": 0
+      },
+      {
+        "id": 16,
+        "cardID": 64,
+        "skill": 92,
+        "unlocked": true,
+        "level": 0,
+        "points": 1481,
+        "trophies": 0
+      },
+      {
+        "id": 17,
+        "cardID": 68,
+        "skill": 93,
+        "unlocked": true,
+        "level": 0,
+        "points": 1451,
+        "trophies": 0
+      },
+      {
+        "id": 18,
+        "cardID": 72,
+        "skill": 94,
+        "unlocked": true,
+        "level": 8,
+        "points": 1452,
+        "trophies": 0
+      },
+      {
+        "id": 19,
+        "cardID": 95,
+        "skill": 99,
+        "unlocked": true,
+        "level": 8,
+        "points": 1486,
+        "trophies": 0
+      },
+      {
+        "id": 20,
+        "cardID": 100,
+        "skill": 104,
+        "unlocked": true,
+        "level": 0,
+        "points": 1458,
+        "trophies": 0
+      },
+      {
+        "id": 21,
+        "cardID": 105,
+        "skill": 109,
+        "unlocked": true,
+        "level": 0,
+        "points": 1492,
+        "trophies": 0
+      },
+      {
+        "id": 22,
+        "cardID": 110,
+        "skill": 114,
+        "unlocked": true,
+        "level": 8,
+        "points": 1518,
+        "trophies": 0
+      },
+      {
+        "id": 23,
+        "cardID": 115,
+        "skill": 119,
+        "unlocked": true,
+        "level": 0,
+        "points": 1469,
+        "trophies": 0
+      },
+      {
+        "id": 24,
+        "cardID": 120,
+        "skill": 124,
+        "unlocked": true,
+        "level": 8,
+        "points": 1476,
+        "trophies": 0
+      },
+      {
+        "id": 25,
+        "cardID": 125,
+        "skill": 129,
+        "unlocked": true,
+        "level": 0,
+        "points": 1471,
+        "trophies": 0
+      },
+      {
+        "id": 26,
+        "cardID": 130,
+        "skill": 0,
+        "unlocked": true,
+        "level": 0,
+        "points": 1556,
+        "trophies": 0
+      }
+    ],
+    "BrawlerID": 4
+  },
+  {
+    "lowID": 2,
+    "token": "63zBGp6OHIbyZKY9L2Ic33UYezsw1bGUoxDmTx7K",
+    "Trophies": 0,
+    "TrophyRoadTier": 1,
+    "Experience": 512,
+    "Thumbnail": 0,
+    "Namecolor": 0,
+    "TokensDoubler": 500,
+    "BattleTokens": 200,
+    "Tickets": 0,
+    "Starpoints": 0,
+    "BigBox": 0,
+    "Gold": 1000,
+    "Box": 40,
+    "Gems": 100,
+    "BrawlerID": 0,
+    "SkinID": 0,
+    "AuthorCode": "",
+    "Name": "Selyavvi",
+    "ClubID": 0,
+    "ClubRole": 1,
+    "TrioWINS": 0,
+    "SoloWINS": 0,
+    "Status": 5,
+    "Shop": [],
+    "Brawlers": [
+      {
+        "id": 0,
+        "cardID": 0,
+        "skill": 0,
+        "unlocked": true,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 1,
+        "cardID": 4,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 2,
+        "cardID": 8,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 3,
+        "cardID": 12,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 4,
+        "cardID": 16,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 5,
+        "cardID": 20,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 6,
+        "cardID": 24,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 7,
+        "cardID": 28,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 8,
+        "cardID": 32,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 9,
+        "cardID": 36,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 10,
+        "cardID": 40,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 11,
+        "cardID": 44,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 12,
+        "cardID": 48,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 13,
+        "cardID": 52,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 14,
+        "cardID": 56,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 15,
+        "cardID": 60,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 16,
+        "cardID": 64,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 17,
+        "cardID": 68,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 18,
+        "cardID": 72,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 19,
+        "cardID": 95,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 20,
+        "cardID": 100,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 21,
+        "cardID": 105,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 22,
+        "cardID": 110,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 23,
+        "cardID": 115,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 24,
+        "cardID": 120,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 25,
+        "cardID": 125,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 26,
+        "cardID": 130,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      }
+    ]
+  },
+  {
+    "lowID": 3,
+    "token": "dhXOwTkPCkQhPISpvQ8ehhM4SSgKiETmdzToYVCJ",
+    "Trophies": 0,
+    "TrophyRoadTier": 1,
+    "Experience": 512,
+    "Thumbnail": 0,
+    "Namecolor": 0,
+    "TokensDoubler": 500,
+    "BattleTokens": 200,
+    "Tickets": 0,
+    "Starpoints": 0,
+    "BigBox": 0,
+    "Gold": 1000,
+    "Box": 20,
+    "Gems": 100,
+    "BrawlerID": 0,
+    "SkinID": 0,
+    "AuthorCode": "",
+    "Name": "максим",
+    "ClubID": 0,
+    "ClubRole": 1,
+    "TrioWINS": 0,
+    "SoloWINS": 0,
+    "Status": 1,
+    "Shop": [
+      {
+        "name": " ",
+        "cost": 0,
+        "timer": 86400,
+        "ShopDisplay": 1,
+        "type": 0,
+        "claim": false,
+        "includes": [
+          {
+            "id": 1,
+            "multiplier": 332,
+            "dataRef": [
+              0,
+              0
+            ],
+            "skinID": 0
+          }
+        ]
+      },
+      {
+        "name": " ",
+        "cost": 54,
+        "timer": 86400,
+        "ShopDisplay": 1,
+        "type": 1,
+        "claim": false,
+        "includes": [
+          {
+            "id": 8,
+            "multiplier": 268,
+            "dataRef": [
+              16,
+              0
+            ],
+            "skinID": 0
+          }
+        ]
+      }
+    ],
+    "Skins": [],
+    "Brawlers": [
+      {
+        "id": 0,
+        "cardID": 0,
+        "skill": 0,
+        "unlocked": true,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 1,
+        "cardID": 4,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 2,
+        "cardID": 8,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 3,
+        "cardID": 12,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 4,
+        "cardID": 16,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 5,
+        "cardID": 20,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 6,
+        "cardID": 24,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 7,
+        "cardID": 28,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 8,
+        "cardID": 32,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 9,
+        "cardID": 36,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 10,
+        "cardID": 40,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 11,
+        "cardID": 44,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 12,
+        "cardID": 48,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 13,
+        "cardID": 52,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 14,
+        "cardID": 56,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 15,
+        "cardID": 60,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 16,
+        "cardID": 64,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 17,
+        "cardID": 68,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 18,
+        "cardID": 72,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 19,
+        "cardID": 95,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 20,
+        "cardID": 100,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 21,
+        "cardID": 105,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 22,
+        "cardID": 110,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 23,
+        "cardID": 115,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 24,
+        "cardID": 120,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 25,
+        "cardID": 125,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      },
+      {
+        "id": 26,
+        "cardID": 130,
+        "skill": 0,
+        "unlocked": false,
+        "level": 0,
+        "points": 0,
+        "trophies": 0
+      }
+    ]
+  }
+]
